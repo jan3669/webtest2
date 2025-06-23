@@ -42,13 +42,23 @@
       color: #101820;
     }
 
-    input {
+    input[type="text"], input[type="password"] {
       width: 100%;
       padding: 12px;
-      margin: 10px 0 20px;
+      margin: 10px 0 15px;
       border: 1px solid #ccc;
       border-radius: 5px;
       font-size: 1rem;
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .checkbox-container input[type="checkbox"] {
+      margin-right: 8px;
     }
 
     button {
@@ -81,19 +91,44 @@
     <h2>Interns Login</h2>
     <input type="text" id="username" placeholder="Username" required />
     <input type="password" id="password" placeholder="Password" required />
+
+    <!-- Fixed: Proper aligned checkbox and label -->
+    <div class="checkbox-container">
+      <input type="checkbox" id="togglePassword" />
+      <label for="togglePassword">Show Password</label>
+    </div>
+
     <button onclick="checkLogin()">Login</button>
     <p id="error" class="error">❌ Invalid username or password</p>
   </div>
 
   <script>
+    // Show welcome popup
+    window.onload = function () {
+      alert("🔐 Welcome to the Interns Login.\nPlease enter your credentials to continue.");
+    };
+
+    // Password toggle
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordField = document.getElementById("password");
+
+    togglePassword.addEventListener("change", function () {
+      passwordField.type = this.checked ? "text" : "password";
+    });
+
+    // Login check
     function checkLogin() {
       const user = document.getElementById("username").value;
       const pass = document.getElementById("password").value;
       const error = document.getElementById("error");
 
-      if (user === "Ummatii" && pass === "ummatii@12345") {
+      if (user === "Ummatii" && pass === "admin@12345") {
         window.location.href = "https://surveyheart.com/form/6852eb8f1721a26433d667aa";
-      } else {
+      } 
+      else if (user === "Ummatii" && pass === "ummatii@123") {
+        window.location.href = "https://forms.gle/HsJWogKDRftNJMdj9";
+      } 
+      else {
         error.style.display = "block";
       }
     }
